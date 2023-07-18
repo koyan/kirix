@@ -16,10 +16,30 @@ def hello_world():
 @application.route("/latex")
 def latex():
     form = """
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                nr_fields = 1;
+                function add() {
+                 
+                    nr_fields = nr_fields + 1
+                    var new_input = '<h3>Αρθρο ' + nr_fields + '</h3><input type="text" name="title_' + nr_fields + '" value="Τίτλος"><br>';
+                    $('#articles').append(new_input);
+                    var new_textarea = '<textarea id="text_' + nr_fields + '" name="text_' + nr_fields + '" rows="4" cols="50">Κείμενο</textarea><br>';
+                    $('#articles').append(new_textarea);
+                    
+                    $('#nr_articles').val(nr_fields);
+
+                }
+            </script>
             <form action="/submit" method="post" target="_blank">
-            <input type="text" name="title_1" value="My title 1"><br>
-            <input type="text" name="text_1" value="My text goes here"><br>
-            <input type="submit" value="creatre">
+            <div id="articles">
+                <h3>Αρθρο 1</h3>
+                <input type="hidden" id="nr_articles" name="nr_articles" value="1">
+                <input type="text" name="title_1" value="Τίτλος"><br>
+                <textarea id="text_1" name="text_1" rows="4" cols="50">Κείμενο</textarea><br>
+            </div>
+            <button type="button" onclick="add()">Add</button>                       
+            <input type="submit" value="Create"><br>
             </form>
             """        
     
