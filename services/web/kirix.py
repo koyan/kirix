@@ -55,12 +55,14 @@ def get_font():
     
 @application.route("/submit", methods=['POST'])
 def submit():
-    title_1 = 'Uknown'
-    text_1 = 'Uknown'
-    
+    content_str = ""
+
     if request.method == 'POST':
-        title_1 = request.form.get('title_1')
-        text_1 = request.form.get('text_1')    
+        nr_articles = int(request.form.get("nr_articles"))
+        for n in range(nr_articles):
+           content_str += f"\n\\headline{{{request.form.get(f'title_{n+1}')}}}\n{request.form.get(f'text_{n+1}')}"
+           print("\n")
+           print(content_str)
 
     with open('issue_nr.txt', 'r') as file :
       issue = file.read()
@@ -76,8 +78,7 @@ def submit():
       filedata = file.read()
 
     # Replace the target string
-    filedata = filedata.replace('TITLE_OF_ARTICLE_1', title_1)
-    filedata = filedata.replace('TEXT_OF_ARTICLE_1', text_1)
+    filedata = filedata.replace('CONTENT', content_str)
     
     new_filename = "issue_" + "{:05d}".format(issue_nr) + ".tex"
     # Write the file out again
