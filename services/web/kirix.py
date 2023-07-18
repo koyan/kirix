@@ -82,11 +82,6 @@ def submit():
         with open('issue_nr.txt', 'w') as file:
           file.write(str(issue_nr))
 
-        nr_articles = int(request.form.get("nr_articles"))
-        for n in range(nr_articles):
-           content_str += f"\n\\headline{{{request.form.get(f'title_{n+1}')}}}\n{request.form.get(f'text_{n+1}')}"
-           #print("\n")
-           #print(content_str)
 
         main_image_found = False
         if 'main_image' in request.files:
@@ -109,12 +104,25 @@ def submit():
                     article_image.save(thumbnail_path)
                     
 
+        first_article = True
+        nr_articles = int(request.form.get("nr_articles"))
+        for n in range(nr_articles):
+            if first_article and main_image_found:
+                content_str += f"\\begin{{window}}[2,r,\includegraphics[width=2.0in]{{{new_image_name}}},\centerline{{}}]"
+            content_str += f"\n\\headline{{{request.form.get(f'title_{n+1}')}}}\n{request.form.get(f'text_{n+1}')}"
+            if first_article:
+                first_article = False
+                if main_image_found:
+                    content_str += "\\end{{window}}\n"
+                content_str += "\n\\begin{multicols}{2}\n"
+
 
     with open('newspaper_template.tex', 'r') as file :
       filedata = file.read()
 
     # Replace the target string
     filedata = filedata.replace('CONTENT', content_str)
+    filedata = filedata.replace('REPLACE_ISSUE_NUMBER', str(issue_nr))
     
     new_filename = "issue_" + "{:05d}".format(issue_nr) + ".tex"
     # Write the file out again
@@ -128,6 +136,5 @@ def submit():
     if (main_image_found):
         image_file = HTTP_HOST + 'uploads/' + new_image_name
         url = url+'&snip_uri='+image_file
-    #return redirect(url)
-    return url
+    return redirect(url)
     

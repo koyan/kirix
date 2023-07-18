@@ -6,6 +6,21 @@
 
 \usepackage{newspaper}
 
+\renewcommand{\maketitle}{\thispagestyle{empty}
+\vspace*{-40pt}
+\begin{center}
+{\setlength\fboxsep{3mm}\raisebox{12pt}{\framebox[1.2\width]{\parbox[c]{1.15in}{\begin{center}\small ``Κάθε δημοσιότητα είναι καλή εκτός της νεκρολογίας σου''\end{center}}}}}\hfill%
+{\fontencoding{T1}\fontsize{32}{0}\bfseries
+  \headfont{ΚΉΡΥΞ ΤΡΑΧΗΛΑΣ}}\hfill%	
+\raisebox{12pt}{\textbf{\footnotesize Τραχήλα, Μάνη}}\\
+\vspace*{0.1in}
+\rule[0pt]{\textwidth}{0.5pt}\\
+{No.\arabic{issue}} \hfill \MakeUppercase{\small\it\today} \hfill {\small\MakeUppercase{300 δρχ}}\\
+\rule[6pt]{\textwidth}{1.2pt}
+\end{center}
+\pagestyle{plain}
+}
+
 \usepackage[LGR]{fontenc}
 
 
@@ -13,8 +28,7 @@
 \usepackage[greek]{babel}
 \usepackage{lmodern}
 \date{\today}
-\currentvolume{1}
-\currentissue{1}
+\currentissue{REPLACE_ISSUE_NUMBER}
 
 %% [LianTze] The newspaper package also provides 
 %% these commands to set various metadata:
@@ -25,17 +39,15 @@
 %%   the medieval tall s. For anyone interested 
 %%   in the history: 
 %%  http://medievalwriting.50megs.com/scripts/letters/historys.htm)
-\SetPaperName{ \fontencoding{T1}\fontsize{32}{0}\bfseries
-  \headfont{ΚΉΡΥΧ ΤΡΑΧΗΛΑΣ}}
 
 %% The name used in the running header after
 %% the first page
-\SetHeaderName{Κηρηξ}
+\SetHeaderName{Κήρυξ}
 
 %% and also...
-\SetPaperLocation{Τραχηλα, Μανη}
-\SetPaperSlogan{``Τα νεα της τραχηλας.''}
-\SetPaperPrice{0.00€}
+\SetPaperLocation{Τραχήλα, Μάνη}
+\SetPaperSlogan{``Κάθε δημοσιότητα είναι καλή, εκτός από τη νεκρολογία σου''}
+\SetPaperPrice{300 δρχ}
 
 
 % [LianTze] times (the package not the font) is rather outdated now; use newtx (see later)
@@ -69,12 +81,11 @@
 \usepackage{lipsum}
 
 \begin{document}
-\newfontfamily{\headfont}{bullpen3d.otf}
+\newfontfamily{\headfont}{bullpen 3d.otf}
 \maketitle
 
-\begin{multicols}{3}
-
 CONTENT
+
 
 \closearticle
 
