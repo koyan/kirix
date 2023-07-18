@@ -28,8 +28,11 @@ def latex():
 @application.route('/issue/<issue>')
 def get_issue(issue):
     return send_file('issues/' + issue)
+
+@application.route('/bullpen3d.otf')
+def get_font():
+    return send_file('bullpen3d.otf')
     
-        
 @application.route("/submit", methods=['POST'])
 def submit():
     title_1 = 'Uknown'
@@ -61,6 +64,9 @@ def submit():
     with open('issues/' + new_filename, 'w') as file:
       file.write(filedata)
     
-    url = 'https://www.overleaf.com/docs?snip_uri=' + HTTP_HOST + 'issue/' + new_filename
+    font_file = HTTP_HOST + 'bullpen3d.otf'
+    tex_file = HTTP_HOST + 'issue/' + new_filename
+    
+    url = 'https://www.overleaf.com/docs?snip_uri=' + tex_file + '&snip_uri=' + font_file + '&engine=xelatex'
     return redirect(url)
     #return 'done'
