@@ -1,5 +1,11 @@
-from flask import Flask, jsonify, request, redirect
+from flask import Flask, jsonify, request, redirect, send_file
 import base64
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+HTTP_HOST = os.getenv('HTTP_HOST')
 
 application = Flask(__name__)
 
@@ -18,7 +24,12 @@ def latex():
             """        
     
     return form
+
+@application.route('/issue/<issue>')
+def get_issue(issue):
+    return send_file('issues/' + issue)
     
+        
 @application.route("/submit", methods=['POST'])
 def submit():
     title_1 = 'Uknown'
@@ -45,11 +56,11 @@ def submit():
     filedata = filedata.replace('TITLE_OF_ARTICLE_1', title_1)
     filedata = filedata.replace('TEXT_OF_ARTICLE_1', text_1)
     
-    new_filename = "issues/issue_" + "{:05d}".format(issue_nr) + ".tex"
+    new_filename = "issue_" + "{:05d}".format(issue_nr) + ".tex"
     # Write the file out again
-    with open(new_filename, 'w') as file:
+    with open('issues/' + new_filename, 'w') as file:
       file.write(filedata)
     
-    url = 'https://www.overleaf.com/docs?snip_uri=' + new_filename
+    url = 'https://www.overleaf.com/docs?snip_uri=' + HTTP_HOST + 'issue/' + new_filename
     return redirect(url)
     #return 'done'
