@@ -3,7 +3,7 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: python manage.py run -h 0.0.0.0
+    command: python wsgi.py run -h 0.0.0.0
     volumes:
       - ./services/web/:/usr/src/app/
     ports:
