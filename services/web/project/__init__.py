@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, request, redirect
 import base64
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route("/")
+@application.route("/")
 def hello_world():
     return jsonify(hello="world")
     
-@app.route("/latex")
+@application.route("/latex")
 def latex():
     form = """
             <form action="/submit" method="post" target="_blank">
@@ -19,7 +19,7 @@ def latex():
     
     return form
     
-@app.route("/submit", methods=['POST'])
+@application.route("/submit", methods=['POST'])
 def submit():
     title_1 = 'Uknown'
     text_1 = 'Uknown'
