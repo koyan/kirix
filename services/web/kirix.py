@@ -108,7 +108,7 @@ def submit():
         nr_articles = int(request.form.get("nr_articles"))
         for n in range(nr_articles):
             if first_article and main_image_found:
-                content_str += f"\\begin{{window}}[2,r,\includegraphics[width=2.0in]{{{new_image_name}}},\centerline{{}}]"
+                content_str += f"\\begin{{window}}[2,l,\includegraphics[width=2.0in]{{{new_image_name}}},\centerline{{}}]"
             content_str += f"\n\\headline{{{request.form.get(f'title_{n+1}')}}}\n{request.form.get(f'text_{n+1}')}"
             if first_article:
                 first_article = False
