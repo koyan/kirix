@@ -2,3 +2,5 @@ services/web/issue_nr.txt
 services/web/issues/
 
 services/web/.env
+
+services/web/uploads/
