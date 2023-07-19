@@ -112,11 +112,11 @@ def submit():
             if first_article and main_image_found:
                 content_str += "\n\\begin{multicols}{2}\n"
                 content_str += f"\includegraphics[width=0.4\\textwidth]{{{new_image_name}}}\n"
-            content_str += f"\n{request.form.get(f'text_{n+1}')}"
+            content_str += f"\n{request.form.get(f'text_{n+1}')}\\\\\n "
             if first_article:
                 first_article = False
                 if main_image_found:
-                    content_str += "\n\\end{multicols}\n"
+                    content_str += "\n\\end{multicols}\n\\closearticle\n"
                 content_str += "\n\\begin{multicols}{2}\n"
 
 
