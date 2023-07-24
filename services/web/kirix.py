@@ -49,8 +49,8 @@ def latex():
                 <input type="text" name="title_1" value="Τίτλος"><br>
                 <textarea id="text_1" name="text_1" rows="4" cols="50">Κείμενο</textarea><br>
             </div>
-            <button type="button" onclick="add()">Add</button>                       
-            <input type="submit" value="Create"><br>
+            <br><br><button type="button" onclick="add()">Add</button>
+            <br><br><input type="submit" value="Create"><br>
             </form>
             """        
     
